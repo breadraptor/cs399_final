@@ -1,0 +1,18 @@
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+#Static handler:
+- url: /images
+  static_dir: static/images
+  
+- url: /admin
+  script: admin.app
+  login: required
+  #login can be optional required or admin
+  
+#This is an example of a dynamic handler
+- url: /.*
+  script: hellomars.app
