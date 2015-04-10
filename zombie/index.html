@@ -1,8 +1,23 @@
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
+	<style>
+	h1 {
+		color: grey;
+		font-family: 'Lora', serif;
+	}
+	</style>
+</head>
   <body>
-{% for greeting in greetings %}
- {{ greeting }}
-{% endfor %}
-
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 text-center">
+				<h1>Hello</h1>
+			</div>
+		</div>
+	</div>
   </body>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </html>
