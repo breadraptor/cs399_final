@@ -1,18 +1,29 @@
+application: zombie
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: true
+threadsafe: yes
 
 handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
 #Static handler:
 - url: /images
   static_dir: static/images
+
+- url: .*
+  script: main.app
   
 - url: /admin
   script: admin.app
   login: required
   #login can be optional required or admin
-  
+
 #This is an example of a dynamic handler
 - url: /.*
   script: hellomars.app
+  
+libraries:
+- name: webapp2
+  version: "2.5.2"
