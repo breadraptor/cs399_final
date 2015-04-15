@@ -27,7 +27,7 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             url = users.create_logout_url(self.request.uri)
             url_linktext = 'Logout'
-            greeting = "Goodbye, "
+            greeting = "Hello, "
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
