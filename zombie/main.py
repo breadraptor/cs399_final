@@ -25,7 +25,7 @@ class MainHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         template_values = {}
         if user:
-            url = users.create_logout_url(self.request.uri)
+            url = users.create_logout_url('/')
             url_linktext = 'Logout'
             greeting = "Hello, "
         else:
@@ -44,6 +44,6 @@ class MainHandler(webapp2.RequestHandler):
         self.response.out.write(template.render("index.html", template_values))
     
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/main', MainHandler)
 ], debug=True)
 
