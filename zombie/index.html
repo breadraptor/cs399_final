@@ -34,6 +34,16 @@
 			</div>
 		</div>
 
+		<div class="">
+			<h2>Task List</h2>
+				<ul id="tasklist">
+					<li>new task<li>
+					{%for task in thetasklist%}
+					<li>{{task}}</li>
+					{%endfor%}
+				</ul>
+		</div>	
+
 		<div class="row">
 			<div class="col-xs-6 section text-center">
 				<iframe
