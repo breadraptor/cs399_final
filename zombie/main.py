@@ -48,6 +48,20 @@ class MainHandler(webapp2.RequestHandler):
         
         self.response.out.write(template.render("index.html", template_values))
         
+    def post(self):
+        user = users.get_current_user()
+        if user:
+            # put the completed challenge in the db
+            username = user.nickname()
+            challenge = self.request.get('challenge')
+            obj = ChallengesCompleted(username=username, challenge=challenge)
+            obj.put()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        self.redirect('/main')
+        
 class Erin(webapp2.RequestHandler):
 
        def get(self):
@@ -93,24 +107,9 @@ class Jack(webapp2.RequestHandler):
           'url': url,
           'url_linktext': url_linktext
         }
-         
-        
         self.response.out.write(template.render("Jack.html", template_values))
 
-    
-    def post(self):
-        user = users.get_current_user()
-        if user:
-			# put the completed challenge in the db
-            username = user.nickname()
-            challenge = self.request.get('challenge')
-            obj = ChallengesCompleted(username=username, challenge=challenge)
-            obj.put()
-        else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Login'
-            greeting = "Hello, you."
-        self.redirect('/main')
+
 
 app = webapp2.WSGIApplication([
     ('/main', MainHandler),
