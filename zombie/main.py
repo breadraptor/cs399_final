@@ -48,10 +48,64 @@ class MainHandler(webapp2.RequestHandler):
         }
         
         self.response.out.write(template.render("index.html", template_values))
+        
+class Erin(webapp2.RequestHandler):
+
+       def get(self):
+        #self.response.write('Hello world!')
+        
+        user = users.get_current_user()
+        template_values={}
+        if user:
+            url = users.create_logout_url('/')
+            url_linktext = 'Logout'
+            greeting = "Hello, " 
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        template_values = {
+          'greetings': greeting ,
+          'user': user,
+          'url': url,
+          'url_linktext': url_linktext
+        }
+         
+        
+        self.response.out.write(template.render("Erin.html", template_values))
+class Jack(webapp2.RequestHandler):
+
+       def get(self):
+        #self.response.write('Hello world!')
+        
+        user = users.get_current_user()
+        template_values={}
+        if user:
+            url = users.create_logout_url('/')
+            url_linktext = 'Logout'
+            greeting = "Hello, " 
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        template_values = {
+          'greetings': greeting ,
+          'user': user,
+          'url': url,
+          'url_linktext': url_linktext
+        }
+         
+        
+        self.response.out.write(template.render("Jack.html", template_values))
+
     
 app = webapp2.WSGIApplication([
-    ('/main', MainHandler)
+    ('/main', MainHandler),
+    ('/Erin', Erin),
+    ('/Jack', Jack),
+
 ], debug=True)
+
 
 class Challenge(ndb.Model):
     username = ndb.StringProperty(required=False)

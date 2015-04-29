@@ -16,6 +16,14 @@ handlers:
   script: main.app
   login: required
   
+- url: /Erin
+  script: main.app
+  login: required
+
+- url: /Jack
+  script: main.app
+  login: required
+  
   
 - url: /admin
   script: admin.app
