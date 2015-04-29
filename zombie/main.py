@@ -5,8 +5,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import datetime
-import models.ChallengesCompleted as ChallengesCompletedClass
-import models.Challenge as ChallengeClass
+import models
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):      
@@ -21,8 +20,8 @@ class MainHandler(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
             greeting = "Hello, you."
-        challenges = ChallengeClass.Challenge.query().fetch() # pure list of challenges, one per row
-        total = len(ChallengesCompletedClass.ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
+        challenges = models.Challenge.query().fetch() # pure list of challenges, one per row
+        total = len(models.ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
         template_values = {
           'greetings': greeting ,
           'user': user,
@@ -40,7 +39,7 @@ class MainHandler(webapp2.RequestHandler):
             # put the completed challenge in the db
             username = user.nickname()
             challenge = self.request.get('challenge')
-            obj = ChallengesCompletedClass.ChallengesCompleted(username=username, challenge=challenge)
+            obj = models.ChallengesCompleted(username=username, challenge=challenge)
             obj.put()
         else:
             url = users.create_login_url(self.request.uri)
