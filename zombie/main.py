@@ -17,6 +17,8 @@
 import webapp2
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
+from google.appengine.ext import ndb
+import datetime
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -28,22 +30,29 @@ class MainHandler(webapp2.RequestHandler):
             url = users.create_logout_url('/')
             url_linktext = 'Logout'
             greeting = "Hello, "
+
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
             greeting = "Hello, you."
-
+        
+        challenges = Challenge.query().fetch(2)
         template_values = {
           'greetings': greeting ,
           'user': user,
           'url': url,
-          'url_linktext': url_linktext
+          'url_linktext': url_linktext,
+          'challenges': challenges
         }
-         
         
         self.response.out.write(template.render("index.html", template_values))
     
 app = webapp2.WSGIApplication([
     ('/main', MainHandler)
 ], debug=True)
+
+class Challenge(ndb.Model):
+    username = ndb.StringProperty(required=False)
+    challenge = ndb.StringProperty(required=True)
+    date = ndb.DateTimeProperty(auto_now_add=True)
 

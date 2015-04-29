@@ -23,7 +23,7 @@
 </head>
   <body>
 
-	<div class="container">
+	<div class="container" style="padding-bottom: 200px;">
 	  <div class="row">{{ greetings }}{{user.nickname}}<br>
 	  <a href="{{url}}">{{url_linktext}}</a>
 	  </div>
@@ -70,6 +70,35 @@
 					<img src="static/peep.png">
 					<img src="static/peep.png">
 			</div>
+			<div class="col-xs-6 text-center" style="padding-top:40px;">
+				<form>
+					<div class="form-group">
+					<table class="table table-bordered table-condensed">
+					<tr>
+						<td>Challenge</td>
+						<td>Date Posted</td>
+						<td>Accept?</td>
+					</tr>
+					{% for challenge in challenges %}
+					<tr>
+						<td>{{ challenge.challenge }}
+						<div style="font-size: 13px; font-style: italic;">Completed: {{challenge.username}}</div></td>
+						<td><span style="font-size:13px;">{{ challenge.date }}</span></td>
+						<td>
+						 <div class="checkbox">
+						<label>
+						  <input type="checkbox">
+						</label>
+					  </div>
+					  </td>
+					</tr>
+					{% endfor %}
+					</div>
+					</table>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+			
 		</div>
 	</div>
 	<div class="container placeFooter" style="  position: fixed; margin: 0 auto;left: 0;right: 0;bottom: 0;">
