@@ -66,23 +66,23 @@
 					<img src="static/peep.png">
 			</div>
 			<div class="col-xs-6 text-center" style="padding-top:40px;">
-				<form>
+				<form method="post">
 					<div class="form-group">
 					<table class="table table-bordered table-condensed">
 					<tr>
 						<td>Challenge</td>
 						<td>Date Posted</td>
-						<td>Accept?</td>
+						<td>Completed?</td>
 					</tr>
 					{% for challenge in challenges %}
 					<tr>
 						<td>{{ challenge.challenge }}
-						<div style="font-size: 13px; font-style: italic;">Completed: {{challenge.username}}</div></td>
+						<div style="font-size: 13px; font-style: italic;">Posted by: {{challenge.username}}</div></td>
 						<td><span style="font-size:13px;">{{ challenge.date }}</span></td>
 						<td>
-						 <div class="checkbox">
+						 <div class="radio">
 						<label>
-						  <input type="checkbox">
+						  <input type="radio" name="challenge" value={{ challenge.challenge }}>
 						</label>
 					  </div>
 					  </td>

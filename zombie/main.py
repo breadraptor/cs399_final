@@ -35,9 +35,8 @@ class MainHandler(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
             greeting = "Hello, you."
-        
-        challenges = Challenge.query().fetch(2)
-        total = len(Challenge.query().fetch())
+        challenges = Challenge.query().fetch() # pure list of challenges, one per row
+        total = len(ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
         template_values = {
           'greetings': greeting ,
           'user': user,
@@ -99,6 +98,20 @@ class Jack(webapp2.RequestHandler):
         self.response.out.write(template.render("Jack.html", template_values))
 
     
+    def post(self):
+        user = users.get_current_user()
+        if user:
+			# put the completed challenge in the db
+            username = user.nickname()
+            challenge = self.request.get('challenge')
+            obj = ChallengesCompleted(username=username, challenge=challenge)
+            obj.put()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        self.redirect('/main')
+
 app = webapp2.WSGIApplication([
     ('/main', MainHandler),
     ('/Erin', Erin),
@@ -112,3 +125,6 @@ class Challenge(ndb.Model):
     challenge = ndb.StringProperty(required=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
+class ChallengesCompleted(ndb.Model):
+    username = ndb.StringProperty(required=True)
+    challenge = ndb.StringProperty(required=True)
