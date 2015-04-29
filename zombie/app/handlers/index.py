@@ -20,7 +20,7 @@ class MainHandler(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
             greeting = "Hello, you."
-        challenges = models.Challenge.query().fetch() # pure list of challenges, one per row
+        challenges = models.Challenge.query().order(-models.Challenge.date).fetch(8) # pure list of challenges, one per row
         total = len(models.ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
         template_values = {
           'greetings': greeting ,
