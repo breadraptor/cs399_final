@@ -1,11 +1,12 @@
 import webapp2
-from google.appengine.ext.webapp import template
 from google.appengine.api import users
+from app.models.models import *
+from jinja2 import Environment, PackageLoader
+
+env = Environment(loader=PackageLoader('app', 'templates'))
 
 class SplashHandler(webapp2.RequestHandler):
-    def get(self):
-        #self.response.write('Hello world!')
-        
+    def get(self): 
         user = users.get_current_user()
         template_values = {}
         if user:
@@ -18,15 +19,10 @@ class SplashHandler(webapp2.RequestHandler):
             greeting = "Hello, you."
 
         template_values = {
-          'greetings': greeting ,
+          'greetings': greeting,
           'user': user,
           'url': url,
           'url_linktext': url_linktext
         }
-         
-        
-        self.response.out.write(template.render("splash.html", template_values))
-    
-app = webapp2.WSGIApplication([
-    ('/', SplashHandler)
-], debug=True)
+        template = env.get_template("splash.html")
+        self.response.out.write(template.render(template_values))

@@ -8,36 +8,16 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+
 #Static handler:
 - url: /static
   static_dir: static
 
-- url: /main
+- url: .*
   script: main.app
-  login: required
-  
-- url: /Erin
-  script: main.app
-  login: required
 
-- url: /Jack
-  script: main.app
-  login: required
-  
-  
-- url: /admin
-  script: admin.app
-  login: required
-  
-- url: /
-  script: splash.app
-
-  #login can be optional required or admin
-
-#This is an example of a dynamic handler
-- url: /.*
-  script: hellomars.app
-  
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: jinja2
+  version: latest
