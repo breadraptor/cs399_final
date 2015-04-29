@@ -22,7 +22,9 @@ import datetime
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        #self.response.write('Hello world!')
+        # IMPORTANT: UN-COMMENT THE TWO LINES BELOW TO SEED THE DATABASE FOR CHALLENGE.
+        #migrate = Migrate()
+        #migrate.populate()
         
         user = users.get_current_user()
         template_values = {}
@@ -127,3 +129,15 @@ class Challenge(ndb.Model):
 class ChallengesCompleted(ndb.Model):
     username = ndb.StringProperty(required=True)
     challenge = ndb.StringProperty(required=True)
+
+    
+class Migrate:
+    def populate(self):
+        obj = Challenge(username="Nancy", challenge="Climb a tree")
+        obj.put()
+        obj = Challenge(username="Erin", challenge="Play some L4D")
+        obj.put()
+        obj = Challenge(username="Jack", challenge="Run a mile")
+        obj.put()
+        obj = ChallengesCompleted(username="Nancy", challenge="Play some L4D") # this brings the days you survive up
+        obj.put()
