@@ -1,31 +1,15 @@
 #!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+
 import webapp2
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import datetime
+import models.ChallengesCompleted as ChallengesCompletedClass
+import models.Challenge as ChallengeClass
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        # IMPORTANT: UN-COMMENT THE TWO LINES BELOW TO SEED THE DATABASE FOR CHALLENGE.
-        #migrate = Migrate()
-        #migrate.populate()
-        
+    def get(self):      
         user = users.get_current_user()
         template_values = {}
         if user:
@@ -37,8 +21,8 @@ class MainHandler(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
             greeting = "Hello, you."
-        challenges = Challenge.query().fetch() # pure list of challenges, one per row
-        total = len(ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
+        challenges = ChallengeClass.Challenge.query().fetch() # pure list of challenges, one per row
+        total = len(ChallengesCompletedClass.ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
         template_values = {
           'greetings': greeting ,
           'user': user,
@@ -56,7 +40,7 @@ class MainHandler(webapp2.RequestHandler):
             # put the completed challenge in the db
             username = user.nickname()
             challenge = self.request.get('challenge')
-            obj = ChallengesCompleted(username=username, challenge=challenge)
+            obj = ChallengesCompletedClass.ChallengesCompleted(username=username, challenge=challenge)
             obj.put()
         else:
             url = users.create_login_url(self.request.uri)
@@ -111,26 +95,14 @@ class Jack(webapp2.RequestHandler):
         }
         self.response.out.write(template.render("Jack.html", template_values))
 
-
-
 app = webapp2.WSGIApplication([
     ('/main', MainHandler),
     ('/Erin', Erin),
     ('/Jack', Jack),
 
 ], debug=True)
-
-
-class Challenge(ndb.Model):
-    username = ndb.StringProperty(required=False)
-    challenge = ndb.StringProperty(required=True)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-
-class ChallengesCompleted(ndb.Model):
-    username = ndb.StringProperty(required=True)
-    challenge = ndb.StringProperty(required=True)
-
     
+# IMPORTANT: this has some dummy Challenge data to test on, if you run populate().
 class Migrate:
     def populate(self):
         obj = Challenge(username="Nancy", challenge="Climb a tree")
