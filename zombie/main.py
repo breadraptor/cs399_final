@@ -37,12 +37,14 @@ class MainHandler(webapp2.RequestHandler):
             greeting = "Hello, you."
         
         challenges = Challenge.query().fetch(2)
+        total = len(Challenge.query().fetch())
         template_values = {
           'greetings': greeting ,
           'user': user,
           'url': url,
           'url_linktext': url_linktext,
-          'challenges': challenges
+          'challenges': challenges,
+          'total': total
         }
         
         self.response.out.write(template.render("index.html", template_values))
