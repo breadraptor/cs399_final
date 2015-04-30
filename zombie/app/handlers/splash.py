@@ -12,7 +12,7 @@ class SplashHandler(webapp2.RequestHandler):
         if user:
             url = users.create_logout_url('/')
             url_linktext = 'Logout'
-            greeting = "Goodbye, "
+            greeting = "Goodbye, " + user.nickname()
         else:
             url = users.create_login_url('/main')
             url_linktext = 'Login'

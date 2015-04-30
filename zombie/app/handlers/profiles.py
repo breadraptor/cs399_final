@@ -18,7 +18,7 @@ class Erin(webapp2.RequestHandler):
         if user:
             url = users.create_logout_url('/')
             url_linktext = 'Logout'
-            greeting = "Hello, " 
+            greeting = "Hello, " + user.nickname()
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
