@@ -6,13 +6,14 @@ from jinja2 import Environment, PackageLoader
 env = Environment(loader=PackageLoader('app', 'templates'))
 
 class SplashHandler(webapp2.RequestHandler):
-    def get(self): 
+    def get(self):
         user = users.get_current_user()
         template_values = {}
         if user:
             url = users.create_logout_url('/')
             url_linktext = 'Logout'
             greeting = "Goodbye, " + user.nickname()
+            self.redirect('/main')
         else:
             url = users.create_login_url('/main')
             url_linktext = 'Login'
