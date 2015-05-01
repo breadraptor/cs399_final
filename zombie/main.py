@@ -10,6 +10,9 @@ app = webapp2.WSGIApplication([
     ('/main', index.MainHandler),
     ('/Erin', profiles.Erin),
     ('/Jack', profiles.Jack),
+    ('/Nancy', profiles.Nancy),
+    ('/Sarah', profiles.Sarah),
+    ('/David', profiles.David),
 	('/splash', splash.SplashHandler),
 	('/new', challenge.ChallengeHandler),
 	('/', splash.SplashHandler)

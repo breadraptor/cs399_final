@@ -56,3 +56,77 @@ class Jack(webapp2.RequestHandler):
         }
         template = env.get_template("Jack.html")
         self.response.out.write(template.render(template_values))
+
+class Nancy(webapp2.RequestHandler):
+
+    def get(self):
+        user = users.get_current_user()
+        template_values={}
+        challenges = len(models.ChallengesCompleted.query(models.ChallengesCompleted.username=='Nancy').fetch())
+        if user:
+            url = users.create_logout_url('/')
+            url_linktext = 'Logout'
+            greeting = "Hello, " + user.nickname()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        template_values = {
+          'greetings': greeting ,
+          'user': user,
+          'url': url,
+          'url_linktext': url_linktext,
+          'challenges_completed': challenges
+        }
+        template = env.get_template("Nancy.html")
+        self.response.out.write(template.render(template_values))
+
+class Sarah(webapp2.RequestHandler):
+
+    def get(self):
+        user = users.get_current_user()
+        template_values={}
+        challenges = len(models.ChallengesCompleted.query(models.ChallengesCompleted.username=='Sarah').fetch())
+        if user:
+            url = users.create_logout_url('/')
+            url_linktext = 'Logout'
+            greeting = "Hello, " + user.nickname()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        template_values = {
+          'greetings': greeting ,
+          'user': user,
+          'url': url,
+          'url_linktext': url_linktext,
+          'challenges_completed': challenges
+        }
+        template = env.get_template("Sarah.html")
+        self.response.out.write(template.render(template_values))
+
+class David(webapp2.RequestHandler):
+
+    def get(self):
+        user = users.get_current_user()
+        template_values={}
+        challenges = len(models.ChallengesCompleted.query(models.ChallengesCompleted.username=='David').fetch())
+        if user:
+            url = users.create_logout_url('/')
+            url_linktext = 'Logout'
+            greeting = "Hello, " + user.nickname()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+            greeting = "Hello, you."
+        template_values = {
+          'greetings': greeting ,
+          'user': user,
+          'url': url,
+          'url_linktext': url_linktext,
+          'challenges_completed': challenges
+        }
+        template = env.get_template("David.html")
+        self.response.out.write(template.render(template_values))
+
+
