@@ -41,6 +41,6 @@ class LocationHandler(webapp2.RequestHandler):
             obj = models.Point(lat= lat, lon=lon, description=sort_of_thing)
             obj.user = user
             obj.put()
-            self.response.out.write("<div style='padding-top:100px; padding-left:100px;'>Your challenge has been added! <a href='/main'>Click here</a> to return home.</div>")
+            self.response.out.write("<div style='padding-top:100px; padding-left:100px;'>It's been added! Go check it out. <a href='/main'>Click here</a> to return home.</div>")
         else:
             self.response.out.write("<div style='padding-top:100px; padding-left:100px;'>You must be logged in to make a challenge.<br><br><a href='/'>Login</a></div>")
