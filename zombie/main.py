@@ -4,7 +4,7 @@ import os, sys, webapp2
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "lib"))
 
-from app.handlers import index, profiles, splash, challenge
+from app.handlers import index, profiles, splash, challenge, location
 
 app = webapp2.WSGIApplication([
     ('/main', index.MainHandler),
@@ -15,6 +15,7 @@ app = webapp2.WSGIApplication([
     ('/David', profiles.David),
 	('/splash', splash.SplashHandler),
 	('/new', challenge.ChallengeHandler),
+	('/location', location.LocationHandler),
 	('/', splash.SplashHandler)
 
 ], debug=True)
