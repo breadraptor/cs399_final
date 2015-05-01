@@ -46,6 +46,9 @@ class MainHandler(webapp2.RequestHandler):
             greeting = "Hello, you."
         challenges = models.Challenge.query().order(-models.Challenge.date).fetch(8) # pure list of challenges, one per row
         total = len(models.ChallengesCompleted.query().fetch()) # one row for each challenge that one person has completed
+        map_items = models.Point.query()
+        map_url = make_map_url(map_items)
+
         template_values = {
           'greetings': greeting ,
           'user': user,
