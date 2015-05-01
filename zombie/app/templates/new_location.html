@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="padding-bottom: 200px; padding-left: 200px;">
+	<form method="post">
+		<div class="form-group">
+			<label for="point" style="font-size:30px; font-family:'the-girl-next-door';">Latitude</label>
+        <input type="text" name="lat" id="lat" value="ex. 35.2028° N">
+			<label for="point" style="font-size:30px; font-family:'the-girl-next-door';">Longitude</label>
+        <input type="text" name="lon" id="lon" value="ex. 111.6644° W">
+    </div>
+    <div class="form-group">
+      <label style="font-size:30px; font-family:'the-girl-next-door';">This location marks...</label>
+      <div class ="radio">
+        <label style="font-size:30px; font-family:'the-girl-next-door';">
+          <input type="radio" name="type" id="type" value="water"> Water
+        </label><br>
+        <label style="font-size:30px; font-family:'the-girl-next-door';">
+          <input type="radio" name="type" id="type" value="food"> Food
+        </label><br>
+        <label style="font-size:30px; font-family:'the-girl-next-door';">
+          <input type="radio" name="type" id="type" value="weapons"> Weapons
+        </label><br>
+        <label style="font-size:30px; font-family:'the-girl-next-door';">
+          <input type="radio" name="type" id="type" value="shelter"> Shelter
+        </label><br>
+        <label style="font-size:30px; font-family:'the-girl-next-door';">
+          <input type="radio" name="type" id="type" value="other"> Other
+        </label>
+      </div>
+    </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+{%endblock%}
