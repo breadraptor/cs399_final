@@ -185,7 +185,7 @@
 
 <!-- This is the main container and "shell" for the todo app. -->
 <div id="todo-app">
-    <label class="todo-label" for="new-todo">What should we do to prepare for the apocalpyse?</label>
+    <label class="todo-label" for="new-todo">Community Message Board</label>
     <input type="text" id="new-todo" class="todo-input">
 
     <ul id="todo-list"></ul>
@@ -229,21 +229,24 @@
 YUI().use('event-focus', 'json', 'model', 'model-list', 'view', function (Y) {
     var TodoAppView, TodoList, TodoModel, TodoView;
 
-// TodoModel class extends Y.Model 
-TodoModel = Y.TodoModel = Y.Base.create('todoModel', Y.Model, [], {
- //this is loading info from a local sync or something, but that part is down below.
-    sync: LocalStorageSync('todo'),
-//let's you know if it's done or still available.
-    toggleDone: function () {
-        this.set('done', !this.get('done')).save();
-    }
-}, {
-    ATTRS: {
-        done: {value: false},
-//item is done or not
-        text: {value: ''}
-    }
-});
+    // TodoModel class extends Y.Model 
+    TodoModel = Y.TodoModel = Y.Base.create(
+        'todoModel', Y.Model, [], {
+            //this is loading info from a local sync or something, but that part is down below.
+            sync: LocalStorageSync('todo'),
+            //let's you know if it's done or still available.
+            toggleDone: function () {
+                this.set('done', !this.get('done')).save();
+            }
+        }, 
+        {
+            ATTRS: {
+                done: {value: false},
+                //item is done or not
+                text: {value: ''}
+            }
+        }
+    );
 
 
 // The TodoList class extends Y.ModelList and customizes it to hold a list of
@@ -372,10 +375,7 @@ TodoAppView = Y.TodoAppView = Y.Base.create('todoAppView', Y.View, [], {
     // todo item is added to the list.
     add: function (e) {
         var view = new TodoView({model: e.model});
-
-        this.get('container').one('#todo-list').append(
-            view.render().get('container')
-        );
+        this.get('container').one('#todo-list').append(view.render().get('container'));
     },
 
     // Removes all finished todo items from the list.
