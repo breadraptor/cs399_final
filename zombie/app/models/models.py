@@ -10,7 +10,8 @@ class Challenge(ndb.Model):
     challenge = ndb.StringProperty(required=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
 	
-#class Point(ndb.Model):
-#    description = ndb.StringProperty()
-#    creator = ndb.UserProperty()
-#    location = ndb.GeoPtProperty(0.0)
+class Point(ndb.Model):
+    description = ndb.StringProperty()
+    creator = ndb.UserProperty()
+    lat = ndb.StringProperty()
+    lon = ndb.StringProperty()
