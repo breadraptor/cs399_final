@@ -55,7 +55,7 @@ class MainHandler(webapp2.RequestHandler):
           'url': url,
           'url_linktext': url_linktext,
           'challenges': challenges,
-          'total': total
+          'total': total,
           'map_url': map_url
         }
         template = env.get_template("index.html")
