@@ -16,15 +16,8 @@
 
 		<div class="row">
 			<div class="col-xs-6 section text-center">
-				<iframe
-					width="550"
-					height="450"
-					frameborder="0" style="border:0"
-					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDCJ0rFan58B5cGEjNEDi6NH7xpLcTVGB0
-					&q=2112+S+Huffer+ln,+Flagstaff+AZ+86011
-					&zoom=18
-					&maptype=satellite">
-				</iframe>
+				<img src={{map_url}} alt="Google Map of "><br>
+      <i><a href="/location">Mark a new location!</a></i>
 			</div>
 			<div class="col-xs-6 section text-center">
 				<iframe src="https://www.google.com/calendar/embed?src=29luj0v8v8ukvf1r8sbe0j82gk%40group.calendar.google.com&ctz=America/Phoenix" style="border: 0" width="550" height="450" frameborder="0" scrolling="yes"></iframe>
@@ -240,7 +233,7 @@
 YUI().use('event-focus', 'json', 'model', 'model-list', 'view', function (Y) {
     var TodoAppView, TodoList, TodoModel, TodoView;
 
-// TodoModel class extends Y.Model 
+// TodoModel class extends Y.Model
 TodoModel = Y.TodoModel = Y.Base.create('todoModel', Y.Model, [], {
  //this is loading info from a local sync or something, but that part is down below.
     sync: LocalStorageSync('todo'),
